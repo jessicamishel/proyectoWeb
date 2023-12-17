@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >
+    <h:head>
+        <title>Áreas</title>
+    </h:head>
+    <h:body>        
+
+    </h:body>
+    <h:form>
+        <h:dataTable value="#{areaMB.areas}" var="area" id="dtAreas">
+            <h:column>
+                <f:facet name="header">
+                    Descripción                    
+                </f:facet>
+                <h:outputLabel value="#{area.descripcion}"/>
+            </h:column>            
+
+        </h:dataTable>
+        <h:dataTable value="#{personaMB.personas}" var="persona" id="dtPersonas">
+            <h:column>
+                <f:facet name="header">
+                    Responsable                    
+                </f:facet>
+                <h:outputLabel value="#{persona.nombre}"/>
+
+            </h:column>
+            <h:column>
+                <h:outputLabel value="#{persona.apellido}"/>
+            </h:column>              
+        </h:dataTable>
+        <h:dataTable value="#{procesoMB.procesos}" var="proceso" id="dtProceso">
+            <h:column>
+                <f:facet name="header">
+                    Proceso                    
+                </f:facet>
+                <h:outputLabel value="#{proceso.descripcion}"/>   
+            </h:column>
+        </h:dataTable>
+
+    </h:form>
+
+</html>
+
