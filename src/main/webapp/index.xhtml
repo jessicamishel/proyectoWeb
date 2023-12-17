@@ -3,45 +3,80 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
       >
     <h:head>
-        <title>Áreas</title>
+        <title>Ingreso de proyecto</title>
     </h:head>
-    <h:body>        
+    <h:body>
+        <center>
+            <p:outputLabel value="Ingreso de proyecto" style="font-weight: bolder; font-size: 14px"/>            
+        </center>        
 
     </h:body>
     <h:form>
-        <h:dataTable value="#{areaMB.areas}" var="area" id="dtAreas">
-            <h:column>
-                <f:facet name="header">
-                    Descripción                    
-                </f:facet>
-                <h:outputLabel value="#{area.descripcion}"/>
-            </h:column>            
-
-        </h:dataTable>
-        <h:dataTable value="#{personaMB.personas}" var="persona" id="dtPersonas">
-            <h:column>
-                <f:facet name="header">
-                    Responsable                    
-                </f:facet>
-                <h:outputLabel value="#{persona.nombre}"/>
-
-            </h:column>
-            <h:column>
-                <h:outputLabel value="#{persona.apellido}"/>
-            </h:column>              
-        </h:dataTable>
-        <h:dataTable value="#{procesoMB.procesos}" var="proceso" id="dtProceso">
-            <h:column>
-                <f:facet name="header">
-                    Proceso                    
-                </f:facet>
-                <h:outputLabel value="#{proceso.descripcion}"/>   
-            </h:column>
-        </h:dataTable>
+        <center>
+            <p:outputLabel value="Capacitación ORIGAMI"/>        
+        </center>
+        <p:outputLabel value="Proceso"/>    <br/>
+        <p:selectOneMenu >
+            <f:selectItem itemLabel="Seleccione"/> 
+            <f:selectItems value="#{proyectoMB.procesos}" var="proceso" itemValue="#{proceso}" itemLabel="#{proceso.descripcion}"></f:selectItems>           
+        </p:selectOneMenu>
+        <br/>
+        <p:outputLabel value="Area"/>    <br/>
+        <p:selectOneMenu>
+            <f:selectItem itemLabel="Seleccione" />
+            <f:selectItems value="#{proyectoMB.areas}" var="areas" itemValue="#{areas}" itemLabel="#{areas.descripcion}"></f:selectItems>
+        </p:selectOneMenu>
+        <br/>
+        <p:outputLabel value="Tipo"/>    <br/>
+        <p:selectOneMenu value="#{proyectoMB.proyecto.tipo}">
+            <f:selectItem itemLabel="Seleccione" />
+            <f:selectItem itemValue="Gestión" itemLabel="Gestión" />
+            <f:selectItem itemValue="Inversión" itemLabel="Inversión" />
+        </p:selectOneMenu>
+        
+        <br/>
+        <p:outputLabel value="Recurrente"/>    <br/>
+        <p:selectBooleanCheckbox value="#{proyectoMB.proyecto.recurrente}"/>
+      
+        <br/>
+        <p:outputLabel value="Arrastre"/>    <br/>
+        <p:selectBooleanCheckbox value="#{proyectoMB.proyecto.arrastre}"/>
+        
+        <br/>
+        <p:outputLabel value="Denominación del Proyecto:"/>    <br/>
+        <p:inputText value="#{proyectoMB.proyecto.denominacion}"/>
+        
+        <br/>
+        <p:outputLabel value="Detalle en caso de arrastre:"/>    <br/>
+        <p:inputText value="#{proyectoMB.proyecto.detalleArrastre}"/>
 
     </h:form>
+    <!--    <h:form>
+            <p:dataTable value="# {areaMB.areas}" var="area" id="dtAreas">
+                <p:column headerText="Descripción">                
+                    <h:outputLabel value="# {area.descripcion}"/>
+                </p:column>            
+            </p:dataTable>
+            <p:dataTable value=" # {personaMB.personas}" var="persona" id="dtPersonas">
+                <p:column headerText="Nombre">                
+                    <h:outputLabel value="# {persona.nombre}"/>
+                </p:column>
+                <p:column headerText="Apellido">
+                    <h:outputLabel value="# {persona.apellido}"/>
+                </p:column>              
+            </p:dataTable>
+            <h:dataTable value="# {procesoMB.procesos}" var="proceso" id="dtProceso">
+                <h:column>
+                    <f:facet name="header">
+                        Proceso                    
+                    </f:facet>
+                    <h:outputLabel value="# {proceso.descripcion}"/>   
+                </h:column>
+            </h:dataTable>
+        </h:form>-->
 
 </html>
 
