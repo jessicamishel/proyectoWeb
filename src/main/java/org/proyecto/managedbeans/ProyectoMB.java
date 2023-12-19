@@ -10,7 +10,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.proyecto.config.Constantes;
 import org.proyecto.model.Area;
+import org.proyecto.model.Persona;
 import org.proyecto.model.Proceso;
 import org.proyecto.model.Proyecto;
 import org.proyecto.services.interfaces.AppServices;
@@ -28,19 +30,36 @@ public class ProyectoMB implements Serializable {
     private List<Proyecto> proyectos;
     private List<Area> areas;
     private List<Proceso> procesos;
+    private List<Persona> personas;
     private Proyecto proyecto;
 
     @PostConstruct
     public void init() {
         proyecto = new Proyecto();
-    //    proyectos = appServices.methodListGET("http://127.0.0.1:8082/consultarProyecto", Proyecto[].class);
+        //    proyectos = appServices.methodListGET("http://127.0.0.1:8082/consultarProyecto", Proyecto[].class);
         areas = appServices.methodListGET("http://127.0.0.1:8082/consultarArea", Area[].class);
         procesos = appServices.methodListGET("http://127.0.0.1:8082/consultarProceso", Proceso[].class);
+        personas = appServices.methodListGET("http://127.0.0.1:8082/consultarResponsable", Persona[].class);
 
     }
 
     public AppServices getAppServices() {
         return appServices;
+    }
+
+    public void guardarProyecto() {
+        try {
+            System.out.println("Guardar");
+            Proyecto p = (Proyecto) appServices.methodPOST(proyecto, "http://127.0.0.1:8082/guardarProyecto", Proyecto.class);
+
+            if (p != null) {
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            
+        }
+
     }
 
     public void setAppServices(AppServices appServices) {
@@ -77,6 +96,14 @@ public class ProyectoMB implements Serializable {
 
     public void setProyecto(Proyecto proyecto) {
         this.proyecto = proyecto;
+    }
+
+    public List<Persona> getPersonas() {
+        return personas;
+    }
+
+    public void setPersonas(List<Persona> personas) {
+        this.personas = personas;
     }
 
 }

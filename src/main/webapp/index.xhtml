@@ -7,53 +7,96 @@
       >
     <h:head>
         <title>Ingreso de proyecto</title>
+        <h:outputStylesheet library="primefaces" name="themes/bootstrap/theme.css" />
     </h:head>
     <h:body>
-        <center>
+        <center style="font-size: 20px; color: #333; font-weight: bold; margin-top: 10px; padding: 20px; background-color: #ffffff; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
             <p:outputLabel value="Ingreso de proyecto" style="font-weight: bolder; font-size: 14px"/>            
         </center>        
 
     </h:body>
-    <h:form>
-        <center>
-            <p:outputLabel value="Capacitación ORIGAMI"/>        
-        </center>
-        <p:outputLabel value="Proceso"/>    <br/>
-        <p:selectOneMenu >
-            <f:selectItem itemLabel="Seleccione"/> 
-            <f:selectItems value="#{proyectoMB.procesos}" var="proceso" itemValue="#{proceso}" itemLabel="#{proceso.descripcion}"></f:selectItems>           
-        </p:selectOneMenu>
-        <br/>
-        <p:outputLabel value="Area"/>    <br/>
-        <p:selectOneMenu>
-            <f:selectItem itemLabel="Seleccione" />
-            <f:selectItems value="#{proyectoMB.areas}" var="areas" itemValue="#{areas}" itemLabel="#{areas.descripcion}"></f:selectItems>
-        </p:selectOneMenu>
-        <br/>
-        <p:outputLabel value="Tipo"/>    <br/>
-        <p:selectOneMenu value="#{proyectoMB.proyecto.tipo}">
-            <f:selectItem itemLabel="Seleccione" />
-            <f:selectItem itemValue="Gestión" itemLabel="Gestión" />
-            <f:selectItem itemValue="Inversión" itemLabel="Inversión" />
-        </p:selectOneMenu>
-        
-        <br/>
-        <p:outputLabel value="Recurrente"/>    <br/>
-        <p:selectBooleanCheckbox value="#{proyectoMB.proyecto.recurrente}"/>
-      
-        <br/>
-        <p:outputLabel value="Arrastre"/>    <br/>
-        <p:selectBooleanCheckbox value="#{proyectoMB.proyecto.arrastre}"/>
-        
-        <br/>
-        <p:outputLabel value="Denominación del Proyecto:"/>    <br/>
-        <p:inputText value="#{proyectoMB.proyecto.denominacion}"/>
-        
-        <br/>
-        <p:outputLabel value="Detalle en caso de arrastre:"/>    <br/>
-        <p:inputText value="#{proyectoMB.proyecto.detalleArrastre}"/>
+    <div>
+        <div  style="width: 45%; display: inline-block;">
+            <h:form >      
+                <center>
+                    <p:outputLabel value="Capacitación ORIGAMI"/>        
+                </center>
+                <p:outputLabel value="Proceso"/>    <br/>
+                <p:selectOneMenu value="#{proyectoMB.proyecto.proceso}" converter="dtoConverter" >
+                    <f:selectItem itemLabel="Seleccione"/> 
+                    <f:selectItems value="#{proyectoMB.procesos}" var="proceso" itemValue="#{proceso}" itemLabel="#{proceso.descripcion}"></f:selectItems>           
+                </p:selectOneMenu>
+                <br/>
+                <p:outputLabel value="Area"/>    <br/>
+                <p:selectOneMenu value="#{proyectoMB.proyecto.area}" converter="dtoConverter">
+                    <f:selectItem itemLabel="Seleccione" />
+                    <f:selectItems value="#{proyectoMB.areas}" var="areas" itemValue="#{areas}" itemLabel="#{areas.descripcion}"></f:selectItems>
+                </p:selectOneMenu>
 
-    </h:form>
+                <br/>
+                <p:outputLabel value="Tipo"/>    <br/>
+                <p:selectOneMenu value="#{proyectoMB.proyecto.tipo}" >
+                    <f:selectItem itemLabel="Seleccione" />
+                    <f:selectItem itemValue="Gestión" itemLabel="Gestión" />
+                    <f:selectItem itemValue="Inversión" itemLabel="Inversión" />
+                </p:selectOneMenu>
+
+                <br/>
+                <p:outputLabel value="Recurrente"/>    <br/>
+                <p:selectBooleanCheckbox value="#{proyectoMB.proyecto.recurrente}"/>
+
+                <br/>
+                <p:outputLabel value="Arrastre"/>    <br/>
+                <p:selectBooleanCheckbox value="#{proyectoMB.proyecto.arrastre}"/>
+
+                <br/>
+                <p:outputLabel value="Denominación del Proyecto:"/>    <br/>
+                <p:inputText value="#{proyectoMB.proyecto.denominacion}"/>
+
+                <br/>
+                <p:outputLabel value="Detalle en caso de arrastre:"/>    <br/>
+                <p:inputText value="#{proyectoMB.proyecto.detalleArrastre}"/>
+            </h:form>
+        </div>
+        <div style="width: 45%; display: inline-block;" >
+            <h:form >
+                <br/>
+                <center>
+                    <p:outputLabel value="Datos Generales"/>        
+                </center>
+
+                <br/>
+                <p:outputLabel value="Responsable"/>    <br/>
+                <p:selectOneMenu value="#{proyectoMB.proyecto.responsable}" converter="dtoConverter">
+                    <f:selectItem itemLabel="Seleccione" />
+                    <f:selectItems value="#{proyectoMB.personas}" var="personas" itemValue="#{personas}" itemLabel="#{personas.nombre} #{personas.apellido}"/>
+                </p:selectOneMenu>
+
+                <br/>
+                <p:outputLabel value="Objetivo General:"/>    <br/>
+                <p:inputText value="#{proyectoMB.proyecto.objetivo}"/>
+
+                <br/>
+                <p:outputLabel value="Descripción breve:"/>    <br/>
+                <p:inputTextarea value="#{proyectoMB.proyecto.descripcionBreve}"/>
+
+                <br/>
+                <p:outputLabel value="Costo estimado"/>    <br/>
+                <p:inputText value="#{proyectoMB.proyecto.costoProyecto}"/>
+
+                <br/>
+                <p:outputLabel value="Fecha de inicio"/>    <br/>
+                <p:datePicker value="#{proyectoMB.proyecto.fechaInicio}"/>
+
+                <br/>
+                <p:outputLabel value="Fecha de finalización"/>    <br/>
+                <p:datePicker value="#{proyectoMB.proyecto.fechaFin}"/>
+
+                <br/>
+                <p:commandButton value="Guardar" actionListener="#{proyectoMB.guardarProyecto()}"  process="@all" update="@all" />
+            </h:form>
+        </div>
+    </div>
     <!--    <h:form>
             <p:dataTable value="# {areaMB.areas}" var="area" id="dtAreas">
                 <p:column headerText="Descripción">                
